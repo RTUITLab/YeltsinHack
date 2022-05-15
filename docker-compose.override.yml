@@ -22,7 +22,7 @@ services:
     build:
       context: frontend
       args:
-        VUE_APP_API_HOST: /apii
+        VUE_APP_API_HOST: /api
   proxy:
     build: proxy
     ports:
