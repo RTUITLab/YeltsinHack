@@ -1,0 +1,10 @@
+version: '3.9'
+
+
+services:
+  backend:
+    image: ghcr.io/rtuitlab/eltsin/backend
+  frontend:
+    image: ghcr.io/rtuitlab/eltsin/frontend
+  proxy:
+    image: ghcr.io/rtuitlab/eltsin/proxy

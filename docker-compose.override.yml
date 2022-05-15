@@ -1,0 +1,29 @@
+version: '3.9'
+
+volumes:
+  pg_data: {}
+
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: museum
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    build: backend
+    command: bash -c "python migrate.py && python run.py"
+    environment:
+      DEBUG_MODE: true
+      ROOT_PATH: /api
+      DATABASE_URL: postgresql+psycopg2://postgres:password@database:5432/museum
+  frontend:
+    build:
+      context: frontend
+      args:
+        VUE_APP_API_HOST: /apii
+  proxy:
+    build: proxy
+    ports:
+      - 8000:80
